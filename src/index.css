@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Ochiq fonda oʻqiladigan, toʻqroq oltin gradient */
+  --gold-gradient: linear-gradient(
+    110deg,
+    #8a6527 0%,
+    #b88b3e 30%,
+    #d9b560 50%,
+    #b88b3e 70%,
+    #8a6527 100%
+  );
+
+  /* Toʻq fonda yaltiraydigan, ochroq oltin gradient */
+  --gold-light-gradient: linear-gradient(
+    110deg,
+    #cfa557 0%,
+    #f1d99a 35%,
+    #fff3cf 50%,
+    #f1d99a 65%,
+    #cfa557 100%
+  );
+
+  /* Sakkiz uchli yulduz naqshi (sharqona geometrik naqsh) */
+  --star-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23cfa557' stroke-width='1'%3E%3Cpath d='M40 4 48 24 68 16 56 34 76 40 56 46 68 64 48 56 40 76 32 56 12 64 24 46 4 40 24 34 12 16 32 24Z'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-paper-100 font-sans text-deep-800 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(207, 165, 87, 0.35);
+    color: #0b3336;
+  }
+}
+
+@layer components {
+  /* Yengil fil suyagi rangidagi fon */
+  .bg-soft {
+    background: linear-gradient(180deg, #fffdf8 0%, #fbf6ea 55%, #f3ead3 100%);
+  }
+
+  /* Toʻq zumrad fon (muqova va yakuniy qism uchun) */
+  .bg-night {
+    background:
+      radial-gradient(circle at 50% 0%, #17504b 0%, transparent 58%),
+      linear-gradient(165deg, #0f3d3a 0%, #0b2f2e 55%, #082322 100%);
+  }
+
+  /* Fon ustiga tushadigan yengil yulduz naqshi.
+     Bu sinf berilgan blokda "isolate" ham boʻlishi kerak. */
+  .pattern-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: var(--star-pattern);
+    background-size: 80px 80px;
+    opacity: 0.1;
+  }
+
+  .pattern-overlay-soft::before {
+    opacity: 0.07;
+  }
+
+  /* Oltin gradientli matn (ochiq fonda), sekin yaltiraydi */
+  .text-gold-gradient {
+    background: var(--gold-gradient);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: goldShift 9s ease-in-out infinite;
+  }
+
+  /* Oltin gradientli matn (toʻq fonda) */
+  .text-gold-light-gradient {
+    background: var(--gold-light-gradient);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: goldShift 9s ease-in-out infinite;
+  }
+
+  .gold-divider {
+    background: linear-gradient(90deg, transparent, #b88b3e, transparent);
+  }
+
+  /* Muqova kartasi: qoʻsh oltin hoshiya */
+  .frame-double {
+    border: 1px solid rgba(184, 139, 62, 0.7);
+    box-shadow:
+      inset 0 0 0 7px #fffaf0,
+      inset 0 0 0 8px rgba(184, 139, 62, 0.55),
+      0 30px 70px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Burchak bezaklari */
+  .corner {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border: 1px solid #b88b3e;
+    pointer-events: none;
+  }
+  .corner-tl { top: 18px; left: 18px; border-right: 0; border-bottom: 0; }
+  .corner-tr { top: 18px; right: 18px; border-left: 0; border-bottom: 0; }
+  .corner-bl { bottom: 18px; left: 18px; border-right: 0; border-top: 0; }
+  .corner-br { bottom: 18px; right: 18px; border-left: 0; border-top: 0; }
+
+  /* Bosh sahifa ichki hoshiyasi */
+  .frame-inner {
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(184, 139, 62, 0.45);
+    pointer-events: none;
+  }
+  .frame-inner::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(184, 139, 62, 0.22);
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(184, 139, 62, 0.4);
+    box-shadow:
+      inset 0 0 0 4px rgba(255, 255, 255, 0.7),
+      inset 0 0 0 5px rgba(184, 139, 62, 0.22),
+      0 10px 30px rgba(30, 90, 92, 0.08);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Toʻq fondagi kartalar */
+  .glass-panel-dark {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(207, 165, 87, 0.5);
+    box-shadow:
+      inset 0 0 0 4px rgba(255, 255, 255, 0.03),
+      0 12px 34px rgba(0, 0, 0, 0.25);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Muqova */
+  .invitation-cover {
+    animation: coverReveal 0.8s ease-out both;
+  }
+
+  .invitation-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      120deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.12) 50%,
+      transparent 75%
+    );
+    transform: translateX(-100%);
+    animation: coverShine 8s ease-in-out infinite;
+  }
+
+  .open-invitation-button {
+    box-shadow: 0 0 0 0 rgba(184, 139, 62, 0.35);
+    animation: buttonPulse 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes goldShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes coverReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes coverShine {
+  0%, 35% { transform: translateX(-100%); }
+  65%, 100% { transform: translateX(100%); }
+}
+
+@keyframes buttonPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 139, 62, 0.35); }
+  50% { box-shadow: 0 0 0 10px rgba(184, 139, 62, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
