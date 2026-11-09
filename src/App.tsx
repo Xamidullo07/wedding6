@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   Heart,
   MapPin,
@@ -10,32 +10,32 @@ import {
   Music2,
   Pause,
   Play,
-} from 'lucide-react';
+} from "lucide-react";
 
 /* =========================================================
    MA'LUMOTLAR: taklifnomadagi hamma narsa shu yerdan olinadi
    ========================================================= */
 
-const GROOM = 'Bexruzbek';
-const BRIDE = 'Nodiraxon';
+const GROOM = "Bexruzbek";
+const BRIDE = "Nodiraxon";
 
 // Toshkent vaqti (+05:00) bilan, mehmonning telefon vaqtidan qat'i nazar
-const WEDDING_DATE = new Date('2026-11-15T17:00:00+05:00');
-const DATE_SHORT = '15 · 11 · 2026';
-const DATE_LONG = '15 Noyabr 2026';
-const DATE_FOOTER = '15.11.2026';
-const WEEKDAY = 'Shanba';
-const TIME_TEXT = '17:00';
+const WEDDING_DATE = new Date("2026-11-15T17:00:00+05:00");
+const DATE_SHORT = "15 · 11 · 2026";
+const DATE_LONG = "15 Noyabr 2026";
+const DATE_FOOTER = "15.11.2026";
+const WEEKDAY = "Shanba";
+const TIME_TEXT = "17:00";
 
-const VENUE_NAME = 'Zarkent qishlogʻi';
-const HOST_FAMILY = 'Ganiyevlar oilasi';
+const VENUE_NAME = "Zarkent toʻyxonasi";
+const HOST_FAMILY = "Ganiyevlar oilasi";
 
-// Zarkent qishlogʻining Google Maps havolasini shu yerga qoʻying.
+// Zarkent toʻyxonasining Google Maps havolasini shu yerga qoʻying.
 // Boʻsh qolsa, "Lokatsiyani ochish" tugmasi koʻrinmaydi.
-const MAP_URL = '';
+const MAP_URL = "";
 
 // public/musiqa.mp3 faylidan foydalanadi
-const MUSIC_SRC = '/musiqa.mp3';
+const MUSIC_SRC = "/musiqa.mp3";
 
 /* =========================
    YORDAMCHI HOOK'LAR
@@ -74,16 +74,16 @@ function useWeddingMusic() {
     const handlePause = () => setIsPlaying(false);
     const handleEnded = () => setIsPlaying(false);
 
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.pause();
       audio.currentTime = 0;
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("ended", handleEnded);
       audioRef.current = null;
     };
   }, []);
@@ -94,7 +94,7 @@ function useWeddingMusic() {
       await audioRef.current.play();
       setIsPlaying(true);
     } catch (error) {
-      console.error('Musiqa ishga tushmadi:', error);
+      console.error("Musiqa ishga tushmadi:", error);
     }
   };
 
@@ -117,7 +117,7 @@ function useWeddingMusic() {
    ========================= */
 
 /** Ikki oltin uzuk */
-function Rings({ className = '' }: { className?: string }) {
+function Rings({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 120 80"
@@ -147,7 +147,7 @@ function Divider() {
 /** Ekranga kirganda yumshoq paydo bo'ladi */
 function Reveal({
   children,
-  className = '',
+  className = "",
 }: {
   children: ReactNode;
   className?: string;
@@ -159,7 +159,7 @@ function Reveal({
     const el = ref.current;
     if (!el) return;
 
-    if (typeof IntersectionObserver === 'undefined') {
+    if (typeof IntersectionObserver === "undefined") {
       setShown(true);
       return;
     }
@@ -171,7 +171,7 @@ function Reveal({
           io.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
 
     io.observe(el);
@@ -182,7 +182,7 @@ function Reveal({
     <div
       ref={ref}
       className={`transition-all duration-1000 ease-out motion-reduce:transition-none ${
-        shown ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+        shown ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       } ${className}`}
     >
       {children}
@@ -191,7 +191,7 @@ function Reveal({
 }
 
 function CountdownUnit({ value, label }: { value: number; label: string }) {
-  const padded = String(value).padStart(2, '0');
+  const padded = String(value).padStart(2, "0");
 
   return (
     <div className="flex flex-col items-center">
@@ -212,13 +212,13 @@ function FallingPetals() {
     () =>
       Array.from({ length: 14 }, (_, i) => ({
         id: i,
-        left: `${((i * 7.3 + 5) % 100)}%`,
+        left: `${(i * 7.3 + 5) % 100}%`,
         delay: `${-((i * 1.7) % 14)}s`,
         duration: `${12 + (i % 5) * 2}s`,
         size: 8 + (i % 4) * 4,
         opacity: 0.3 + (i % 3) * 0.12,
       })),
-    []
+    [],
   );
 
   return (
@@ -261,7 +261,7 @@ function InvitationCover({
     <section
       aria-label="Taklifnoma muqovasi"
       className={`invitation-cover bg-night pattern-overlay fixed inset-0 z-50 isolate overflow-y-auto text-deep-800 transition-opacity duration-700 ${
-        leaving ? 'pointer-events-none opacity-0' : 'opacity-100'
+        leaving ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
       <div className="relative z-10 flex min-h-full items-center justify-center px-5 py-10">
@@ -319,42 +319,41 @@ function InvitationCover({
    ASOSIY SAHIFA
    ========================= */
 
-type Phase = 'closed' | 'leaving' | 'open';
+type Phase = "closed" | "leaving" | "open";
 
 function App() {
-  const [phase, setPhase] = useState<Phase>('closed');
+  const [phase, setPhase] = useState<Phase>("closed");
 
-  const { days, hours, minutes, seconds, isOver } =
-    useCountdown(WEDDING_DATE);
+  const { days, hours, minutes, seconds, isOver } = useCountdown(WEDDING_DATE);
   const { isPlaying, start, toggle } = useWeddingMusic();
 
   // Muqova ochiq turganida sahifa aylanmasin
   useEffect(() => {
-    document.body.style.overflow = phase === 'open' ? '' : 'hidden';
+    document.body.style.overflow = phase === "open" ? "" : "hidden";
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [phase]);
 
   const handleOpen = () => {
     // Taklifnoma ochilganda musiqa boshlanadi
     start();
-    setPhase('leaving');
-    window.setTimeout(() => setPhase('open'), 700);
+    setPhase("leaving");
+    window.setTimeout(() => setPhase("open"), 700);
   };
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-paper-100 font-sans text-deep-800">
-      {phase !== 'open' && (
-        <InvitationCover leaving={phase === 'leaving'} onOpen={handleOpen} />
+      {phase !== "open" && (
+        <InvitationCover leaving={phase === "leaving"} onOpen={handleOpen} />
       )}
 
       {/* Musiqa tugmasi */}
-      {phase === 'open' && (
+      {phase === "open" && (
         <button
           type="button"
           onClick={toggle}
-          aria-label={isPlaying ? 'Musiqani toʻxtatish' : 'Musiqani yoqish'}
+          aria-label={isPlaying ? "Musiqani toʻxtatish" : "Musiqani yoqish"}
           className="fixed right-4 top-[max(1rem,env(safe-area-inset-top))] z-40 flex h-12 w-12 items-center justify-center rounded-full border border-gold-400/70 bg-white/90 text-gold-700 shadow-lg backdrop-blur-md transition hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500"
         >
           {isPlaying ? (
