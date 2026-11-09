@@ -20,11 +20,11 @@ const GROOM = 'Bexruzbek';
 const BRIDE = 'Nodiraxon';
 
 // Toshkent vaqti (+05:00) bilan, mehmonning telefon vaqtidan qat'i nazar
-const WEDDING_DATE = new Date('2026-11-01T17:00:00+05:00');
-const DATE_SHORT = '01 · 11 · 2026';
-const DATE_LONG = '1 Noyabr 2026';
-const DATE_FOOTER = '01.11.2026';
-const WEEKDAY = 'Yakshanba';
+const WEDDING_DATE = new Date('2026-11-15T17:00:00+05:00');
+const DATE_SHORT = '15 · 11 · 2026';
+const DATE_LONG = '15 Noyabr 2026';
+const DATE_FOOTER = '15.11.2026';
+const WEEKDAY = 'Shanba';
 const TIME_TEXT = '17:00';
 
 const VENUE_NAME = 'Zarkent qishlogʻi';
@@ -212,7 +212,7 @@ function FallingPetals() {
     () =>
       Array.from({ length: 14 }, (_, i) => ({
         id: i,
-        left: `${(i * 7.3 + 5) % 100}%`,
+        left: `${((i * 7.3 + 5) % 100)}%`,
         delay: `${-((i * 1.7) % 14)}s`,
         duration: `${12 + (i % 5) * 2}s`,
         size: 8 + (i % 4) * 4,
@@ -274,7 +274,7 @@ function InvitationCover({
           <Rings className="mx-auto mb-5 h-14 w-20 text-gold-500" />
 
           <p className="font-sans text-[10px] font-medium uppercase tracking-[0.4em] text-gold-700">
-            Fotiha oshiga taklifnoma
+            Qiz bazmiga taklifnoma
           </p>
 
           <h1 className="mt-6 font-display text-5xl font-semibold italic leading-[1] text-deep-900 sm:text-6xl">
@@ -378,7 +378,7 @@ function App() {
 
         <div className="animate-fade-in relative z-10 mx-auto max-w-2xl">
           <p className="font-sans text-xs uppercase tracking-[0.4em] text-gold-700">
-            Fotiha oshi taklifnomasi
+            Qiz bazmi taklifnomasi
           </p>
 
           <Rings className="mx-auto my-8 h-20 w-28 animate-float text-gold-500" />
@@ -416,7 +416,7 @@ function App() {
           </p>
 
           <h2 className="mt-5 text-balance font-display text-4xl font-semibold leading-tight text-deep-900 sm:text-5xl">
-            Sizni farzandlarimizning fotiha oshiga taklif etamiz
+            Sizni farzandimizning qiz bazmiga taklif etamiz
           </h2>
 
           <Divider />
@@ -481,10 +481,6 @@ function App() {
             {VENUE_NAME}
           </h3>
 
-          {/* <p className="mx-auto mb-8 mt-3 max-w-md font-display text-xl italic text-muted">
-            {HOST_FAMILY} mehmonlarni shu yerda kutadi
-          </p> */}
-
           {MAP_URL && (
             <a
               href={MAP_URL}
@@ -505,12 +501,12 @@ function App() {
           <Divider />
 
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-gold-700">
-            Fotiha oshigacha qolgan vaqt
+            Qiz bazmigacha qolgan vaqt
           </p>
 
           {isOver ? (
             <p className="mt-8 font-display text-4xl italic text-gold-600">
-              Fotiha oshi boshlandi. Tabriklaymiz!
+              Qiz bazmi boshlandi. Tabriklaymiz!
             </p>
           ) : (
             <div className="mt-10 flex justify-center gap-3 sm:gap-8">
@@ -549,10 +545,6 @@ function App() {
             Hurmat bilan
           </p>
 
-          {/* <p className="text-gold-light-gradient mt-4 font-display text-5xl font-semibold italic leading-tight sm:text-6xl">
-            {HOST_FAMILY}
-          </p> */}
-
           <div className="mx-auto mt-12 flex max-w-sm justify-center gap-6">
             {[GROOM, BRIDE].map((name) => (
               <div
@@ -570,7 +562,7 @@ function App() {
           </div>
 
           <p className="mx-auto mt-12 max-w-md font-display text-xl leading-relaxed text-[#f6efdc]/80 sm:text-2xl">
-            Sizni {GROOM} va {BRIDE}ning fotiha oshining aziz mehmoni boʻlishga
+            Sizni {GROOM} va {BRIDE}ning qiz bazmining aziz mehmoni boʻlishga
             taklif qilamiz. Qalblar ezgulikka toʻla boʻlgan ushbu qutlugʻ kunda
             yaqinlarimiz yonida boʻling!
           </p>
